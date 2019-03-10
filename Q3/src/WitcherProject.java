@@ -20,7 +20,7 @@ public class WitcherProject {
      * Definition of some class variables here...
      **/
 
-    private static final String fileName = "Witcher Inventory.csv";
+    private static final String fileName = "Q3/Witcher Inventory.csv";
     private static String[][] dataFromCSV;
     private static boolean hasHeader = false;
     private static int[] indexOfMaxValHelmet;

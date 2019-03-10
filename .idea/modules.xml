@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/IGN_Code_Foo_2019_Inventory_Witcher.iml" filepath="$PROJECT_DIR$/.idea/IGN_Code_Foo_2019_Inventory_Witcher.iml" />
       <module fileurl="file://$PROJECT_DIR$/IGN_Code_Foo_2019_Inventory_Witcher.iml" filepath="$PROJECT_DIR$/IGN_Code_Foo_2019_Inventory_Witcher.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/IGN_Code_Foo_2019_Inventory_Witcher.iml" filepath="$PROJECT_DIR$/.idea/IGN_Code_Foo_2019_Inventory_Witcher.iml" />
     </modules>
   </component>
 </project>
