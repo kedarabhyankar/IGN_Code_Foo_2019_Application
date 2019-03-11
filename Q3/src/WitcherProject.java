@@ -17,23 +17,38 @@ import java.util.Scanner;
 public class WitcherProject {
 
     /**
-     * Definition of some class variables here...
-     **/
-
+     * Modifiable values below:
+     *
+     * @filename - path of the .CSV file in relation to the main project folder
+     * @hasHeader - set to true if the first line in the .CSV file is a row of headers, false otherwise.
+     * @numCrowns - the maximum number of crowns (currency) that can be spent.
+     */
     private static final String fileName = "Q3/Witcher Inventory.csv";
-    private static String[][] dataFromCSV;
     private static boolean hasHeader = false;
+    private static final int numCrowns = 300;
+
+    /**
+     * -----------------------------------------------------WARNING-----------------------------------------------------
+     * The code below this line should not be modified, as it is what makes the program run. Modify at your own
+     * risk.
+     * -----------------------------------------------------WARNING-----------------------------------------------------
+     **/
+    private static String[][] dataFromCSV;
+
     private static int[] indexOfMaxValHelmet;
     private static int[] indexOfMaxValChest;
     private static int[] indexOfMaxValLeggings;
     private static int[] indexOfMaxValBoots;
-    private static final int numCrowns = 300;
+
     private static int sumOfItemCost = 0;
+
     private static ArrayList<Integer> helmetValuesToSkip = new ArrayList<>();
     private static ArrayList<Integer> chestValuesToSkip = new ArrayList<>();
     private static ArrayList<Integer> leggingsValuesToSkip = new ArrayList<>();
     private static ArrayList<Integer> bootsValuesToSkip = new ArrayList<>();
+
     private static boolean firstTimeThrough = true;
+
     private static int maxHelmet = 0;
     private static int maxChest = 0;
     private static int maxLeggings = 0;
@@ -43,8 +58,7 @@ public class WitcherProject {
     private static int maxLeggingsCost = 1000;
     private static int maxBootsCost = 1000;
 
-    /**
-     * Psuedocode
+    /**Pseudocode
      * <p>
      * import csv
      * if csv loads correctly, load csv into 2d array
@@ -80,7 +94,7 @@ public class WitcherProject {
      * convert all data besides words into String forms using .toString();
      * then just do parseInt throughout the array
      * do  loop
-     */
+     */ //Pseudocode in this folded comment
     public static void main(String[] args) throws IOException, NotInDataSetException {
         loadData();
         prettyPrintData("DATA FROM CSV FILE LOADED", "DATA IS DISPLAYED ABOVE");
@@ -91,28 +105,27 @@ public class WitcherProject {
             indexOfMaxValChest = findMaxValueOfType(3, chestValuesToSkip);
             indexOfMaxValLeggings = findMaxValueOfType(2, leggingsValuesToSkip);
             indexOfMaxValBoots = findMaxValueOfType(1, bootsValuesToSkip);
-            sumOfItemCost = Integer.parseInt(dataFromCSV[indexOfMaxValHelmet[0] - 1][indexOfMaxValHelmet[1] - 1]) +
-                    Integer.parseInt(dataFromCSV[indexOfMaxValChest[0] - 1][indexOfMaxValChest[1] - 1]) +
-                    Integer.parseInt(dataFromCSV[indexOfMaxValLeggings[0] - 1][indexOfMaxValLeggings[1] - 1]) +
-                    Integer.parseInt(dataFromCSV[indexOfMaxValBoots[0] - 1][indexOfMaxValBoots[1] - 1]);
+            sumOfItemCost = Integer.parseInt(dataFromCSV[indexOfMaxValHelmet[0]][indexOfMaxValHelmet[1] - 1]) +
+                    Integer.parseInt(dataFromCSV[indexOfMaxValChest[0]][indexOfMaxValChest[1] - 1]) +
+                    Integer.parseInt(dataFromCSV[indexOfMaxValLeggings[0]][indexOfMaxValLeggings[1] - 1]) +
+                    Integer.parseInt(dataFromCSV[indexOfMaxValBoots[0]][indexOfMaxValBoots[1] - 1]);
             //prettyPrintData("=DATA IN ARMOR INDEX FORM", "DATA IS DISPLAYED ABOVE");
             firstTimeThrough = numCrowns - sumOfItemCost < 0;
             if (firstTimeThrough) {
                 System.out.println("Not enough crowns. Retrying.");
             }
-            helmetValuesToSkip.add(Integer.parseInt(dataFromCSV[indexOfMaxValHelmet[0] - 1][indexOfMaxValHelmet[1]]));
-            chestValuesToSkip.add(Integer.parseInt(dataFromCSV[indexOfMaxValChest[0] - 1][indexOfMaxValChest[1]]));
-            leggingsValuesToSkip.add(Integer.parseInt(dataFromCSV[indexOfMaxValLeggings[0] - 1][indexOfMaxValLeggings[1]]));
-            bootsValuesToSkip.add(Integer.parseInt(dataFromCSV[indexOfMaxValBoots[0] - 1][indexOfMaxValBoots[1]]));
+            helmetValuesToSkip.add(Integer.parseInt(dataFromCSV[indexOfMaxValHelmet[0]][indexOfMaxValHelmet[1]]));
+            chestValuesToSkip.add(Integer.parseInt(dataFromCSV[indexOfMaxValChest[0]][indexOfMaxValChest[1]]));
+            leggingsValuesToSkip.add(Integer.parseInt(dataFromCSV[indexOfMaxValLeggings[0]][indexOfMaxValLeggings[1]]));
+            bootsValuesToSkip.add(Integer.parseInt(dataFromCSV[indexOfMaxValBoots[0]][indexOfMaxValBoots[1]]));
             System.out.println();
         } while ((numCrowns - sumOfItemCost) < 0);
-        System.out.println("The maximum helmet value is " + dataFromCSV[indexOfMaxValHelmet[0] - 1][indexOfMaxValHelmet[1]] + " on line " + indexOfMaxValHelmet[0] + ", column " + indexOfMaxValHelmet[1] + " in the CSV file. This item is called " + dataFromCSV[indexOfMaxValHelmet[0] - 1][indexOfMaxValHelmet[1] - 2] + ", and costs " + dataFromCSV[indexOfMaxValHelmet[0] - 1][indexOfMaxValHelmet[1] - 1] + " crowns.");
-        System.out.println("The maximum chest value is " + dataFromCSV[indexOfMaxValChest[0] - 1][indexOfMaxValChest[1]] + " on line " + indexOfMaxValChest[0] + ", column " + indexOfMaxValChest[1] + " in the CSV file. This item is called " + dataFromCSV[indexOfMaxValChest[0] - 1][indexOfMaxValChest[1] - 2] + ", and costs " + dataFromCSV[indexOfMaxValChest[0] - 1][indexOfMaxValChest[1] - 1] + " crowns.");
-        System.out.println("The maximum leggings value is " + dataFromCSV[indexOfMaxValLeggings[0] - 1][indexOfMaxValLeggings[1]] + " on line " + indexOfMaxValLeggings[0] + ", column " + indexOfMaxValLeggings[1] + " in the CSV file. This item is called " + dataFromCSV[indexOfMaxValLeggings[0] - 1][indexOfMaxValLeggings[1] - 2] + ", and costs " + dataFromCSV[indexOfMaxValLeggings[0] - 1][indexOfMaxValLeggings[1] - 1] + " crowns.");
-        System.out.println("The maximum boots value is " + dataFromCSV[indexOfMaxValBoots[0] - 1][indexOfMaxValBoots[1]] + " on line " + (indexOfMaxValBoots[0] + 1) + ", column " + indexOfMaxValBoots[1] + " in the CSV file. This item is called " + dataFromCSV[indexOfMaxValBoots[0]][indexOfMaxValBoots[1] - 2] + ", and costs " + dataFromCSV[indexOfMaxValBoots[0] - 1][indexOfMaxValBoots[1] - 1] + " crowns.");
+        System.out.println("The maximum helmet value is " + dataFromCSV[indexOfMaxValHelmet[0]][indexOfMaxValHelmet[1]] + " on line " + (indexOfMaxValHelmet[0] + 1) + ", column " + indexOfMaxValHelmet[1] + " in the CSV file. This item is called " + dataFromCSV[indexOfMaxValHelmet[0]][indexOfMaxValHelmet[1] - 2] + ", and costs " + dataFromCSV[indexOfMaxValHelmet[0]][indexOfMaxValHelmet[1] - 1] + " crowns.");
+        System.out.println("The maximum chest value is " + dataFromCSV[indexOfMaxValChest[0]][indexOfMaxValChest[1]] + " on line " + (indexOfMaxValChest[0] + 1) + ", column " + indexOfMaxValChest[1] + " in the CSV file. This item is called " + dataFromCSV[indexOfMaxValChest[0]][indexOfMaxValChest[1] - 2] + ", and costs " + dataFromCSV[indexOfMaxValChest[0]][indexOfMaxValChest[1] - 1] + " crowns.");
+        System.out.println("The maximum leggings value is " + dataFromCSV[indexOfMaxValLeggings[0]][indexOfMaxValLeggings[1]] + " on line " + (indexOfMaxValLeggings[0] + 1) + ", column " + indexOfMaxValLeggings[1] + " in the CSV file. This item is called " + dataFromCSV[indexOfMaxValLeggings[0]][indexOfMaxValLeggings[1] - 2] + ", and costs " + dataFromCSV[indexOfMaxValLeggings[0]][indexOfMaxValLeggings[1] - 1] + " crowns.");
+        System.out.println("The maximum boots value is " + dataFromCSV[indexOfMaxValBoots[0]][indexOfMaxValBoots[1]] + " on line " + (indexOfMaxValBoots[0] + 1) + ", column " + indexOfMaxValBoots[1] + " in the CSV file. This item is called " + dataFromCSV[indexOfMaxValBoots[0]][indexOfMaxValBoots[1] - 2] + ", and costs " + dataFromCSV[indexOfMaxValBoots[0]][indexOfMaxValBoots[1] - 1] + " crowns.");
         System.out.println("The total cost of all of the chosen items is " + sumOfItemCost + " crowns.");
         System.out.println("Should you choose to purchase this armor set, you will have " + (numCrowns - sumOfItemCost) + " crowns left.");
-
     }
 
     /**
@@ -221,12 +234,22 @@ public class WitcherProject {
             System.out.print("_");
         }
         System.out.println();
-        for (int i = 1; i < dataFromCSV.length; i++) { //1 if skipping header, else 0
-            for (int j = 0; j < dataFromCSV[i].length; j++) {
-                System.out.printf("| %-40s |", dataFromCSV[i][j]);
+        if (hasHeader) {
+            for (int i = 1; i < dataFromCSV.length; i++) { //1 if skipping header, else 0
+                for (int j = 0; j < dataFromCSV[i].length; j++) {
+                    System.out.printf("| %-40s |", dataFromCSV[i][j]);
+                }
+                System.out.println();
             }
-            System.out.println();
+        } else {
+            for (int i = 0; i < dataFromCSV.length; i++) {
+                for (int j = 0; j < dataFromCSV[i].length; j++) {
+                    System.out.printf("| %-40s |", dataFromCSV[i][j]);
+                }
+                System.out.println();
+            }
         }
+
         System.out.println("============================================================================" + bottomLine + "=============================================================================");
     }
 

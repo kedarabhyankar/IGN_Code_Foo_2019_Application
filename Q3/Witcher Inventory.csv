@@ -1,4 +1,4 @@
-﻿Item Category,Item Name,Item Cost (crowns),Armor Value
+﻿Armor Type,Name,Cost in Crowns, Armor Value
 Helmet,Serpentine Cruz Headpiece,90,23
 Leggings,Famed Pon Leggings,87,22
 Leggings,Ursine Trousers,78,18
@@ -19,6 +19,7 @@ Chest,Dented Plate Armor,57,19
 Leggings,Manticore Braces,56,12
 Chest,Jeweled Drake Tunic,55,19
 Chest,Ginger's Gilded Armor,54,18
+Helmet,Really Cool Helmet,30,90
 Helmet,Offner Protector,54,15
 Leggings,Mail Emares Leggings,53,14
 Boots,Steel Boots,52,14
